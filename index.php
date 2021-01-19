@@ -24,6 +24,9 @@ if (!isset($_SESSION['username'])) {
             <?php if ($_SESSION['role'] == 'admin') : ?>
                 <?= "<a href='admin.php'><img src='img/back-black.png' alt='ADMIN'></a>" ?>
             <?php endif; ?>
+            <?php if ($_SESSION['role'] == 'sales') : ?>
+                <?= "<a href='login/changeProfile.php'>Change Profile</a>" ?>
+            <?php endif; ?>
             <a href="login/logout.php">logout</a>
         </section>
         <section class="main">

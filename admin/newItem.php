@@ -13,12 +13,12 @@ if (isset($_GET['submit'])) {
     $qty = $_GET['qty'];
     $new = true;
     foreach ($items as $item) {
-        if ($item[0] == $qty) {
+        if ($item[0] == $newItem) {
             $new = false;
             break;
         }
     }
-    ($new == true) ? write("INSERT INTO itemList VALUES ('', '$newItem', '$qty')") : write("UPDATE itemList SET qty = qty + $qty WHERE item = $newItem");
+    ($new == false) ? write("UPDATE itemList SET qty = qty + '$qty' WHERE item = '$newItem'") : write("INSERT INTO itemList VALUES ('', '$newItem', '$qty')");
 }
 ?>
 

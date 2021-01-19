@@ -59,6 +59,7 @@ if (isset($_GET["search"]) && $_GET["date"] != "") {
                 <table>
                     <tr>
                         <th>Date</th>
+                        <th>Sales</th>
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Income</th>
@@ -66,10 +67,10 @@ if (isset($_GET["search"]) && $_GET["date"] != "") {
                     <?php foreach ($incomes as $income) : ?>
                         <tr>
                             <?php foreach ($income as $i) : ?>
-                                <?php if ($i == $income[3]) {
+                                <?php if ($i == $income[4]) {
                                     $total_income += $i;
                                 } ?>
-                                <td><?= ($i == $income[3]) ? rupiah($i) : $i ?></td>
+                                <td><?= ($i == $income[4]) ? rupiah($i) : $i ?></td>
                             <?php endforeach; ?>
                         </tr>
                     <?php endforeach; ?>

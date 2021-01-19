@@ -21,6 +21,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
     <div class="circle circle2"></div>
     <div class="container">
         <section class="header">
+            <a href="login/changeProfile.php">Change Profile</a>
             <a href="login/logout.php">logout</a>
         </section>
         <section class="main">

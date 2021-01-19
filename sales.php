@@ -10,10 +10,11 @@ $items = read("SELECT item FROM itemList");
 $users = read("SELECT user FROM userList");
 
 if (isset($_GET["submit"])) {
+    $user = $_SESSION["username"];
     $item = $_GET["item"];
     $qty = $_GET["qty"];
     $income = $_GET["income"];
-    write("INSERT INTO sales VALUES (now(), '$item', '$qty', '$income')");
+    write("INSERT INTO sales VALUES (now(), '$user', '$item', '$qty', '$income')");
     write("UPDATE itemList SET qty = qty - $qty WHERE item = '$item'");
 }
 ?>
@@ -43,11 +44,7 @@ if (isset($_GET["submit"])) {
                 <div class="input">
                     <label>
                         User:
-                        <select type="text" name="user">
-                            <?php foreach ($users as $user) : ?>
-                                <option value="<?= $user[0] ?>"><?= $user[0] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <input type="text" name="user" value="<?= $_SESSION['username'] ?>" readonly>
                     </label>
                     <label>
                         Item:

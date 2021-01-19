@@ -12,7 +12,7 @@ $password = $_POST['password'];
 
 // pengecekan kredensial login
 foreach ($users as $user) {
-    if ($username == $user[1] && $password == $user[3]) {
+    if (($username == $user[1] || $username == $user[0]) && $password == $user[3]) {
         session_start();
         $_SESSION['username'] = $user[1];
         $_SESSION['role'] = $user[2];
