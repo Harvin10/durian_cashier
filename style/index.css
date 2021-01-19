@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela&display=swap");
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+.header,
+footer {
+  height: 5vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Varela", sans-serif;
+  text-transform: capitalize;
+}
+
+.main {
+  min-height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.card {
+  width: 20vw;
+  height: 20vw;
+  border-radius: 1rem;
+  background-image: linear-gradient(
+    to top left,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  box-shadow: 3px 3px 7px #4f85a8;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  background-image: linear-gradient(
+    to top left,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+a {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-align: center;
+  font-family: "Varela", sans-serif;
+  text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .card {
+    width: 25vh;
+    height: 25vh;
+    margin-bottom: 20px;
+  }
+
+  a {
+    font-size: 1.2rem;
+  }
+}
