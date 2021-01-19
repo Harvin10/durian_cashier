@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/index.css">
-    <title>Document</title>
+    <title>Global Durian</title>
 </head>
 
 <body>

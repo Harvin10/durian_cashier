@@ -27,7 +27,7 @@ if (isset($_GET["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/sales.css">
-    <title>Document</title>
+    <title>Global Durian</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ if (isset($_GET["submit"])) {
     <div class="circle circle2"></div>
     <div class="container">
         <section class="header">
-            <a href="index.php" class="back"><img src="img/back-black.png" alt="HOME"></a>
+            <a href="<?= ($_SESSION['role'] == 'admin') ? 'admin.php' : 'index.php' ?>" class="back"><img src="img/back-black.png" alt="HOME"></a>
             <a href="login/logout.php">logout</a>
             <a href="expense.php" class="next"><img src="img/front-black.png" alt="EXPENSE"></a>
         </section>

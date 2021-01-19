@@ -13,7 +13,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
     <meta name="viewport" content="width=7, initial-scale=1.0">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/index.css">
-    <title>Document</title>
+    <title>Global Durian</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
                 <a href="admin/view.php">Read data</a>
             </div>
             <div class="card">
-                <a href="index.php">Home</a>
+                <a href="sales.php">Input Sales</a>
             </div>
         </section>
         <section class="footer">
