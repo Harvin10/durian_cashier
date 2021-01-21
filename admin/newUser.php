@@ -6,12 +6,24 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
     header("Location: login/login.php");
 }
 
+$true = true;
+
+function check($user, $email)
+{
+    $data = read("SELECT user, email FROM userList WHERE user='$user' or email='$email'");
+    return (count($data) == 0) ? true : false;
+}
+
 if (isset($_GET["submit"])) {
-    $username = strtolower($_GET["username"]);
+    $username = ucwords(strtolower($_GET["username"]));
     $email = strtolower($_GET["email"]);
     $password = $_GET["password"];
     $role = strtolower($_GET["role"]);
-    write("INSERT INTO userList VALUES ('$email', '$username', '$role', '$password')");
+    if (check($username, $email)) {
+        write("INSERT INTO userList VALUES ('$email', '$username', '$role', '$password')");
+    } else {
+        $true = false;
+    }
 }
 ?>
 
@@ -21,8 +33,8 @@ if (isset($_GET["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/main.css">
-    <link rel="stylesheet" href="../style/sales.css">
+    <link rel="stylesheet" href="../style/main.css?version=1.0.2">
+    <link rel="stylesheet" href="../style/sales.css?version=1.0.2">
     <title>Global Durian</title>
 </head>
 
@@ -35,6 +47,8 @@ if (isset($_GET["submit"])) {
             <a href="login/logout.php" class="submit">logout</a>
         </section>
         <section class="main">
+            <div class="error">
+            </div>
             <form action="">
                 <div class="input">
                     <label>
@@ -59,7 +73,10 @@ if (isset($_GET["submit"])) {
         </section>
     </div>
     <script>
-        confirmations = document.querySelectorAll(".submit");
+        var confirmations = document.querySelectorAll(".submit");
+        var error = document.querySelector(".error");
+        var validation = <?= $true; ?>
+        console.log(validation);
 
         confirmations.forEach((confirmation) => {
             confirmation.addEventListener("click", () => {
@@ -67,6 +84,10 @@ if (isset($_GET["submit"])) {
                 confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
             })
         });
+
+        if (!validation) {
+            error.innerHTML = 'Username or Email has been used by another user';
+        }
     </script>
 </body>
 

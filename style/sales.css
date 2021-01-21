@@ -41,6 +41,12 @@
   box-sizing: border-box;
 }
 
+.error {
+  text-align: center;
+  color: red;
+  font-family: "Varela", sans-serif;
+}
+
 form {
   width: 100%;
   height: 100%;
@@ -55,6 +61,7 @@ form {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 label {
@@ -68,7 +75,7 @@ label {
 
 input,
 select {
-  width: 280px;
+  width: 250px;
   height: 50px;
   border-radius: 30px;
   -webkit-border-radius: 30px;

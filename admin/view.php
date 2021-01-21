@@ -15,14 +15,24 @@ $users = read("SELECT user FROM userList");
 
 if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
     $dateFrom = $_GET["dateFrom"];
-    $dateTo = $_GET["dateTo"];
+    $dateTo = ($_GET["dateTo"]) ? $_GET["dateTo"] : $dateFrom;
     $user = $_GET["user"];
 
-    $incomes = ($_GET["dateTo"]) ? read("SELECT * FROM sales WHERE date BETWEEN '$dateFrom' AND '$dateTo' ORDER BY date ASC") : read("SELECT * FROM sales WHERE date = '$dateFrom'");
+    $query_i = "SELECT * FROM sales WHERE date BETWEEN '$dateFrom' AND '$dateTo'";
 
-    $expenses = ($_GET["dateTo"]) ? read("SELECT * FROM expense WHERE date BETWEEN '$dateFrom' AND '$dateTo' ORDER BY date ASC") : read("SELECT * FROM expense WHERE date = '$dateFrom'");
+    if ($user) {
+        $query_i .= "AND user = '$user'";
+    }
 
-    $stocks = read("SELECT item, qty FROM itemList");
+    $query_i .= " ORDER BY date ASC";
+
+    $incomes = read($query_i);
+
+    $expenses = ($user == "Nurmy") ? read("SELECT * FROM expense WHERE date BETWEEN '$dateFrom' AND '$dateTo' ORDER BY date ASC") : [];
+
+
+
+    $stocks = read("SELECT * FROM itemList");
 }
 
 ?>
@@ -32,8 +42,8 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/main.css">
-    <link rel="stylesheet" href="../style/view.css">
+    <link rel="stylesheet" href="../style/main.css?version=1.0.2">
+    <link rel="stylesheet" href="../style/view.css?version=1.0.2">
     <title>Global Durian</title>
 </head>
 
@@ -49,13 +59,14 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
             <form action="">
                 <label>
                     From
-                    <input type="date" name="dateFrom">
+                    <input type="date" name="dateFrom" value="<?= $_GET["dateFrom"] ?>" required>
                 </label>
                 <label>
                     To
-                    <input type="date" name="dateTo">
+                    <input type="date" name="dateTo" value="<?= $_GET["dateTo"] ?>">
                 </label>
                 <label>
+                    User
                     <input type="text" name="user" list="users">
                     <datalist id="users">
                         <?php foreach ($users as $user) : ?>
@@ -74,7 +85,6 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Income</th>
-                        <th>Edit</th>
                     </tr>
                     <?php foreach ($incomes as $income) : ?>
                         <tr>
@@ -83,9 +93,8 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
                                     $total_income += $i;
                                 } ?>
                                 <?php if ($key == 0) continue; ?>
-                                <td><?= ($key == 5) ? rupiah($i) : $i ?></td>
+                                <td><?= ($key == 3) ? "<a href='editSales.php?id=$income[0]'>$i" : (($key == 5) ? rupiah($i) : $i) ?></td>
                             <?php endforeach; ?>
-                            <td><a href="editSales.php?id=<?= $income[0] ?>">edit</td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -95,7 +104,6 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
                         <th>Date</th>
                         <th>Informations</th>
                         <th>Expense</th>
-                        <th>Edit</th>
                     </tr>
                     <?php foreach ($expenses as $expense) : ?>
                         <tr>
@@ -104,9 +112,8 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
                                     $total_expense += $e;
                                 } ?>
                                 <?php if ($key == 0) continue; ?>
-                                <td><?= ($key == 3) ? rupiah($e) : $e ?></td>
+                                <td><?= ($key == 2) ? "<a href='editExpenses.php?id=$expense[0]'>$e" : (($key == 3) ? rupiah($e) : $e) ?></td>
                             <?php endforeach; ?>
-                            <td><a href="editExpenses.php?id=<?= $expense[0] ?>">edit</td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -118,8 +125,9 @@ if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
                     </tr>
                     <?php foreach ($stocks as $stock) : ?>
                         <tr>
-                            <?php foreach ($stock as $s) : ?>
-                                <td><?= $s ?></td>
+                            <?php foreach ($stock as $key => $s) : ?>
+                                <?php if ($key == 0) continue; ?>
+                                <td> <?= ($key == 1) ? "<a href='editStock.php?id=$stock[0]'>$s" : $s ?></td>
                             <?php endforeach; ?>
                         </tr>
                     <?php endforeach; ?>

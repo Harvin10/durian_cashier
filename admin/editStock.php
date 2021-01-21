@@ -3,15 +3,11 @@ require '../backend/data.php';
 $id = $_GET['id'];
 
 if (isset($_POST["submit"]) || isset($_POST["delete"])) {
-    $info_c = $_POST["t2"];
-    $expense_c = $_POST["t3"];
+    $qty_c = $_POST["t1"];
 
-    (isset($_POST["submit"])) ? write("UPDATE expense SET info='$info_c', expense='$expense_c' WHERE id='$id'") : write("DELETE FROM expense WHERE id='$id'");
+    write("UPDATE itemList SET qty = $qty_c WHERE id='$id'");
 }
-$x = read("SELECT * FROM sales");
-$datas = read("SELECT * FROM expense WHERE id='$id'");
-
-$datas = ($datas) ? $datas : [[[], []]];
+$datas = read("SELECT item, qty FROM itemList WHERE id='$id'");
 ?>
 
 <!DOCTYPE html>
@@ -35,24 +31,14 @@ $datas = ($datas) ? $datas : [[[], []]];
                 <div class="input">
                     <?php foreach ($datas[0] as $key => $data) : ?>
                         <label>
-                            <?php if ($key == 0 || $key == 1) continue; ?>
-                            <input type="text" name="t<?= $key ?>" value="<?= $data ?>">
+                            <input type="text" name="t<?= $key ?>" value="<?= $data ?>" <?= ($key == 0) ? "readonly" : "" ?>>
                         </label>
                     <?php endforeach; ?>
                 </div>
                 <button type="submit" name="submit">submit</button>
-                <button type="submit" name="delete" class="submit">delete</button>
             </form>
         </section>
     </div>
-    <script>
-        confirmation = document.querySelector(".submit");
-
-        confirmation.addEventListener("click", () => {
-            let text = "delete this item";
-            confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
-        });
-    </script>
 </body>
 
 </html>

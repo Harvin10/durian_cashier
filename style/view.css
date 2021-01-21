@@ -1,5 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Varela&display=swap");
 
+::-webkit-scrollbar {
+  width: 30px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 30px;
+  box-shadow: inset 0 0 1px grey;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6cdbeb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #65dfc9;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -36,15 +58,24 @@
   box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
   padding: 1rem;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 form {
   width: 100%;
-  height: 20%;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Varela", sans-serif;
 }
 
 input {
@@ -90,6 +121,7 @@ button {
   font-size: 1.2rem;
   font-family: "Varela", sans-serif;
   text-transform: capitalize;
+  margin-top: 15px;
 }
 
 button:hover,
@@ -107,7 +139,11 @@ select:hover {
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
-  overflow-y: auto;
+  flex-wrap: wrap;
+}
+
+table {
+  margin: 20px;
 }
 
 table,
@@ -134,17 +170,23 @@ tr {
 
 @media (max-width: 800px) {
   .main {
-    width: 95vw;
+    width: 98vw;
     min-height: 89vh;
     overflow-y: auto;
+    padding: 1rem 1px;
+    box-sizing: border-box;
   }
 
   form {
     flex-direction: column;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
   }
 
   input {
-    width: 200px;
+    width: 125px;
+    height: 25px;
   }
 
   .tables {
@@ -162,6 +204,7 @@ tr {
   th,
   td {
     padding: 3px;
+    font-family: "Varela", sans-serif;
   }
 
   .total {
@@ -169,5 +212,31 @@ tr {
     width: 100%;
     font-size: 1.5rem;
     text-align: center;
+  }
+
+  button {
+    margin: 20px 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 0px;
+    box-shadow: inset 0 0 0px grey;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
   }
 }

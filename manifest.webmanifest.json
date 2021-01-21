@@ -1,7 +1,7 @@
 {
     "name": "Global Durian",
     "short_name": "Global Durian",
-    "start_url": "../startpoint.html",
+    "start_url": "https://globaldurian.rf.gd/admin.php",
     "background_color": "#65dfc9",
     "theme_color": "#6cdbeb",
     "display": "standalone",

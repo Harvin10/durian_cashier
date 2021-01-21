@@ -12,8 +12,8 @@ if (!isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#6cdbeb">
-    <link rel="stylesheet" href="style/main.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/main.css?version=1.0.2">
+    <link rel="stylesheet" href="style/index.css?version=1.0.2">
     <link rel="manifest" href="manifest.webmanifest.json">
     <link rel="apple-touch-icon" href="img/logo192.png">
     <title>Global Durian</title>
