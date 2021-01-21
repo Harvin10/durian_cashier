@@ -11,8 +11,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=7, initial-scale=1.0">
+    <meta name="theme-color" content="#6cdbeb">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/index.css">
+    <link rel="manifest" href="manifest.webmanifest.json">
+    <link rel="apple-touch-icon" href="img/logo192.png">
     <title>Global Durian</title>
 </head>
 
@@ -22,7 +25,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
     <div class="container">
         <section class="header">
             <a href="login/changeProfile.php">Change Profile</a>
-            <a href="login/logout.php">logout</a>
+            <a href="login/logout.php" class="submit">logout</a>
         </section>
         <section class="main">
             <div class="card">
@@ -42,6 +45,15 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
 
         </section>
     </div>
+    <script src="index.js">
+        confirmation = document.querySelector(".submit");
+
+        confirmation.addEventListener("click", () => {
+            console.log("x");
+            let text = "logout";
+            confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
+        });
+    </script>
 </body>
 
 </html>

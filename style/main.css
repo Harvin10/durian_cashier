@@ -123,7 +123,7 @@ table {
 }
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 .container {
-  background-image: linear-gradient(to top right, #6cb1df, #88fbff);
+  background-image: linear-gradient(to right top, #65dfc9, #6cdbeb);
 }
 
 .circle {
@@ -134,9 +134,9 @@ table {
   -o-border-radius: 50%;
   position: absolute;
   background-image: linear-gradient(
-    to bottom left,
+    to right bottom,
     rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.1)
+    rgba(255, 255, 255, 0.3)
   );
 }
 
@@ -159,6 +159,12 @@ a img {
   height: 30px;
 }
 
+.header {
+  text-transform: uppercase;
+}
+
 .header > a {
   font-size: 1rem;
+  color: #426696;
+  text-decoration: none;
 }

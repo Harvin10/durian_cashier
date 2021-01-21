@@ -7,10 +7,10 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != "admin") {
 }
 
 if (isset($_GET["submit"])) {
-    $username = $_GET["username"];
-    $email = $_GET["email"];
+    $username = strtolower($_GET["username"]);
+    $email = strtolower($_GET["email"]);
     $password = $_GET["password"];
-    $role = $_GET["role"];
+    $role = strtolower($_GET["role"]);
     write("INSERT INTO userList VALUES ('$email', '$username', '$role', '$password')");
 }
 ?>
@@ -32,7 +32,7 @@ if (isset($_GET["submit"])) {
     <div class="container">
         <section class="header">
             <a href="../admin.php"><img src="../img/back-black.png" alt="HOME"></a>
-            <a href="login/logout.php">logout</a>
+            <a href="login/logout.php" class="submit">logout</a>
         </section>
         <section class="main">
             <form action="">
@@ -54,10 +54,20 @@ if (isset($_GET["submit"])) {
                         <input type="text" name="role">
                     </label>
                 </div>
-                <button type="submit" name="submit">submit</button>
+                <button type="submit" name="submit" class="submit">submit</button>
             </form>
         </section>
     </div>
+    <script>
+        confirmations = document.querySelectorAll(".submit");
+
+        confirmations.forEach((confirmation) => {
+            confirmation.addEventListener("click", () => {
+                let text = (confirmation == confirmations[0]) ? "logout" : "add new user";
+                confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
+            })
+        });
+    </script>
 </body>
 
 </html>

@@ -39,14 +39,14 @@ if (isset($_GET['submit'])) {
     <div class="container">
         <section class="header">
             <a href="../admin.php"><img src="../img/back-black.png" alt="HOME"></a>
-            <a href="login/logout.php">logout</a>
+            <a href="login/logout.php" class="submit">logout</a>
         </section>
         <section class="main">
             <form action="" method="GET">
                 <div class="input">
                     <label>
                         New Item
-                        select <input type="text" name="newItem" list="itemList">
+                        <input type="text" name="newItem" list="itemList">
                         <datalist id="itemList">
                             <?php foreach ($items as $item) : ?>
                                 <option value="<?= $item[0] ?>"><?= $item[0] ?></option>
@@ -58,10 +58,20 @@ if (isset($_GET['submit'])) {
                         <input type="number" name="qty">
                     </label>
                 </div>
-                <button type="submit" name="submit">submit</button>
+                <button type="submit" name="submit" class="submit">submit</button>
             </form>
         </section>
     </div>
+    <script>
+        confirmations = document.querySelectorAll(".submit");
+
+        confirmations.forEach((confirmation) => {
+            confirmation.addEventListener("click", () => {
+                let text = (confirmation == confirmations[0]) ? "logout" : "add new item";
+                confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
+            })
+        });
+    </script>
 </body>
 
 </html>

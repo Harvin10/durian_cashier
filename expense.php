@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 if (isset($_GET["submit"])) {
     $info = $_GET["info"];
     $expense = $_GET["expense"];
-    write("INSERT INTO expense VALUES (now(), '$info', '$expense')");
+    write("INSERT INTO expense VALUES ('', now(), '$info', '$expense')");
 }
 ?>
 
@@ -30,7 +30,7 @@ if (isset($_GET["submit"])) {
     <div class="container">
         <section class="header">
             <a href="sales.php"><img src="img/back-black.png" alt="SALE"></a>
-            <a href="login/logout.php">logout</a>
+            <a href="login/logout.php" class="submit">logout</a>
             <a href="<?= ($_SESSION['role'] == 'admin') ? 'admin.php' : 'index.php' ?>"><img src="img/front-black.png" alt="HOME"></a>
         </section>
         <section class="main">
@@ -45,10 +45,20 @@ if (isset($_GET["submit"])) {
                         <input type="number" name="expense">
                     </label>
                 </div>
-                <button type="submit" name="submit">submit</button>
+                <button type="submit" name="submit" class="submit">submit</button>
             </form>
         </section>
     </div>
+    <script>
+        confirmations = document.querySelectorAll(".submit");
+
+        confirmations.forEach((confirmation) => {
+            confirmation.addEventListener("click", () => {
+                let text = (confirmation == confirmations[0]) ? "logout" : "add new expenses";
+                confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
+            })
+        });
+    </script>
 </body>
 
 </html>

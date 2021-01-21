@@ -14,7 +14,7 @@ if (isset($_GET["submit"])) {
     $item = $_GET["item"];
     $qty = $_GET["qty"];
     $income = $_GET["income"];
-    write("INSERT INTO sales VALUES (now(), '$user', '$item', '$qty', '$income')");
+    write("INSERT INTO sales VALUES ('', now(), '$user', '$item', '$qty', '$income')");
     write("UPDATE itemList SET qty = qty - $qty WHERE item = '$item'");
 }
 ?>
@@ -36,7 +36,7 @@ if (isset($_GET["submit"])) {
     <div class="container">
         <section class="header">
             <a href="<?= ($_SESSION['role'] == 'admin') ? 'admin.php' : 'index.php' ?>" class="back"><img src="img/back-black.png" alt="HOME"></a>
-            <a href="login/logout.php">logout</a>
+            <a href="login/logout.php" class="submit">logout</a>
             <a href="expense.php" class="next"><img src="img/front-black.png" alt="EXPENSE"></a>
         </section>
         <section class="main">
@@ -63,10 +63,20 @@ if (isset($_GET["submit"])) {
                         <input type="number" name="income">
                     </label>
                 </div>
-                <button type="submit" name="submit">submit</button>
+                <button type="submit" name="submit" class="submit">submit</button>
             </form>
         </section>
     </div>
+    <script>
+        confirmations = document.querySelectorAll(".submit");
+
+        confirmations.forEach((confirmation) => {
+            confirmation.addEventListener("click", () => {
+                let text = (confirmation == confirmations[0]) ? "logout" : "add new sales";
+                confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
+            })
+        });
+    </script>
 </body>
 
 </html>

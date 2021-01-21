@@ -57,6 +57,7 @@ if (isset($_POST['submit'])) {
         var view = false;
         button = document.querySelector(".button");
         password = document.querySelector(".password");
+        confirmations = document.querySelectorAll(".submit");
 
         function see(x) {
             if (x == true) {
@@ -66,11 +67,17 @@ if (isset($_POST['submit'])) {
             }
         }
 
-
         button.addEventListener("click", () => {
             view = !view;
             see(view);
         })
+
+        confirmations.forEach((confirmation) => {
+            confirmation.addEventListener("click", () => {
+                let text = (confirmation == confirmations[0]) ? "logout" : "add new expenses";
+                confirm(`Are you sure you want to ${text}?`) ? true : event.preventDefault();
+            })
+        });
     </script>
 </body>
 

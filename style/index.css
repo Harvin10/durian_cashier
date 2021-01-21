@@ -8,18 +8,15 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow-y: auto;
 }
 
-.header,
-.footer {
+.header {
   height: 5vh;
-  width: 100vw;
+  width: 80vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Varela", sans-serif;
-  text-transform: capitalize;
   z-index: 5;
 }
 
@@ -37,28 +34,28 @@
   width: 20vw;
   height: 20vw;
   border-radius: 1rem;
-  background-image: linear-gradient(
-    to top left,
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0)
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
   );
   -webkit-border-radius: 1rem;
   -moz-border-radius: 1rem;
   -ms-border-radius: 1rem;
   -o-border-radius: 1rem;
-  box-shadow: 3px 3px 7px #4f85a8;
-  backdrop-filter: blur(10px);
+  box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.212);
+  backdrop-filter: blur(2rem);
 }
 
 .card:hover {
-  background-image: linear-gradient(
-    to top left,
+  background: linear-gradient(
+    to right bottom,
     rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.1)
+    rgba(255, 255, 255, 0.2)
   );
 }
 
-a {
+.main a {
   width: 100%;
   height: 100%;
   text-decoration: none;
@@ -75,6 +72,11 @@ a {
 @media (max-width: 768px) {
   .container {
     flex-direction: row;
+    overflow: hidden;
+  }
+
+  .header {
+    width: 95vw;
   }
 
   .card {
@@ -83,7 +85,7 @@ a {
     margin-bottom: 20px;
   }
 
-  a {
+  .main a {
     font-size: 1.2rem;
   }
 }

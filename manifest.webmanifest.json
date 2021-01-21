@@ -1,0 +1,21 @@
+{
+    "name": "Global Durian",
+    "short_name": "Global Durian",
+    "start_url": "../startpoint.html",
+    "background_color": "#65dfc9",
+    "theme_color": "#6cdbeb",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "img/logo192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/logo512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "prefer_related_applications": "true"
+}

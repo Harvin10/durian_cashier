@@ -11,18 +11,16 @@ $expenses = [];
 $stocks = [];
 $total_income = 0;
 $total_expense = 0;
+$users = read("SELECT user FROM userList");
 
-if (isset($_GET["search"]) && $_GET["date"] != "") {
-    $date = $_GET["date"];
+if (isset($_GET["search"]) && isset($_GET["dateFrom"])) {
+    $dateFrom = $_GET["dateFrom"];
+    $dateTo = $_GET["dateTo"];
+    $user = $_GET["user"];
 
-    $part = [];
-    $date_array = explode("-", $date);
-    $year = $date_array[0];
-    $month = $date_array[1];
-    $day = $date_array[2];
-    $incomes = read("SELECT * FROM sales WHERE date = '$year-$month-$day'");
+    $incomes = ($_GET["dateTo"]) ? read("SELECT * FROM sales WHERE date BETWEEN '$dateFrom' AND '$dateTo' ORDER BY date ASC") : read("SELECT * FROM sales WHERE date = '$dateFrom'");
 
-    $expenses = read("SELECT * FROM expense WHERE date = '$year-$month-$day'");
+    $expenses = ($_GET["dateTo"]) ? read("SELECT * FROM expense WHERE date BETWEEN '$dateFrom' AND '$dateTo' ORDER BY date ASC") : read("SELECT * FROM expense WHERE date = '$dateFrom'");
 
     $stocks = read("SELECT item, qty FROM itemList");
 }
@@ -45,12 +43,25 @@ if (isset($_GET["search"]) && $_GET["date"] != "") {
     <div class="container">
         <section class="header">
             <a href="../admin.php"><img src="../img/back-black.png" alt="HOME"></a>
-            <a href="login/logout.php">logout</a>
+            <a href="login/logout.php" class="submit">logout</a>
         </section>
         <section class="main">
             <form action="">
                 <label>
-                    <input type="date" name="date">
+                    From
+                    <input type="date" name="dateFrom">
+                </label>
+                <label>
+                    To
+                    <input type="date" name="dateTo">
+                </label>
+                <label>
+                    <input type="text" name="user" list="users">
+                    <datalist id="users">
+                        <?php foreach ($users as $user) : ?>
+                            <option value="<?= $user[0] ?>"></option>
+                        <?php endforeach; ?>
+                    </datalist>
                 </label>
                 <button type="search" name="search">search</button>
             </form>
@@ -63,15 +74,18 @@ if (isset($_GET["search"]) && $_GET["date"] != "") {
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Income</th>
+                        <th>Edit</th>
                     </tr>
                     <?php foreach ($incomes as $income) : ?>
                         <tr>
-                            <?php foreach ($income as $i) : ?>
-                                <?php if ($i == $income[4]) {
+                            <?php foreach ($income as $key => $i) : ?>
+                                <?php if ($key == 5) {
                                     $total_income += $i;
                                 } ?>
-                                <td><?= ($i == $income[4]) ? rupiah($i) : $i ?></td>
+                                <?php if ($key == 0) continue; ?>
+                                <td><?= ($key == 5) ? rupiah($i) : $i ?></td>
                             <?php endforeach; ?>
+                            <td><a href="editSales.php?id=<?= $income[0] ?>">edit</td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -81,15 +95,18 @@ if (isset($_GET["search"]) && $_GET["date"] != "") {
                         <th>Date</th>
                         <th>Informations</th>
                         <th>Expense</th>
+                        <th>Edit</th>
                     </tr>
                     <?php foreach ($expenses as $expense) : ?>
                         <tr>
-                            <?php foreach ($expense as $e) : ?>
-                                <?php if ($e == $expense[2]) {
+                            <?php foreach ($expense as $key => $e) : ?>
+                                <?php if ($key == 3) {
                                     $total_expense += $e;
                                 } ?>
-                                <td><?= ($e == $expense[2]) ? rupiah($e) : $e ?></td>
+                                <?php if ($key == 0) continue; ?>
+                                <td><?= ($key == 3) ? rupiah($e) : $e ?></td>
                             <?php endforeach; ?>
+                            <td><a href="editExpenses.php?id=<?= $expense[0] ?>">edit</td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
